@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <!-- 指定resource资源文件的名称-->
+    <constant name="struts.custom.i18n.resources" value="message"/>
+    <!-- 设置上传文件的总大小(单位：字节)，默认是10M -->
+    <constant name="struts.multipart.maxSize" value="104857600"/>
+
+    <!--MovieAction配置-->
+    <package name="movie" extends="json-default" strict-method-invocation="false">
+        <interceptors>
+            <interceptor-stack name="myStack">
+                <!-- 配置上传的拦截器 -->
+                <interceptor-ref name="fileUpload">
+                    <!-- 限制上传的文件类型,这里限制为只能上传各种图片类型 -->
+                    <!--<param name="allowedTypes">image/bmp,image/png,image/jpg,image/jpeg</param>-->
+                    <!-- 限制上传文件的大小(单位是字节)-->
+                    <!--<param name="maximumSize">2097152</param>-->
+                </interceptor-ref>
+                <!-- 引用默认的拦截器栈 -->
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <action name="*Movie" class="org.movie.action.MovieAction" method="{1}">
+            <interceptor-ref name="myStack"/>
+            <result name="allMovie" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="del" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="add" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="uploadImage" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdMovie" type="json">
+                <param name="root">movie</param>
+            </result>
+            <result name="updateMovie" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+
+    <!--YearAction配置-->
+    <package name="year" extends="json-default" strict-method-invocation="false">
+        <action name="*Year" class="org.movie.action.YearAction" method="{1}">
+            <result name="allYear" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="delYear" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="addYear" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdYear" type="json">
+                <param name="root">year</param>
+            </result>
+            <result name="updateYear" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+
+    <!--TypeAction配置-->
+    <package name="type" extends="json-default" strict-method-invocation="false">
+        <action name="*Type" class="org.movie.action.TypeAction" method="{1}">
+            <result name="allType" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="delType" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="addType" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdType" type="json">
+                <param name="root">type</param>
+            </result>
+            <result name="updateType" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+
+    <!--AreaAction配置-->
+    <package name="area" extends="json-default" strict-method-invocation="false">
+        <action name="*Area" class="org.movie.action.AreaAction" method="{1}">
+            <result name="allArea" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="delArea" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="addArea" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdArea" type="json">
+                <param name="root">area</param>
+            </result>
+            <result name="updateArea" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+    <!--AuditAction配置-->
+    <package name="audit" extends="json-default" strict-method-invocation="false">
+        <action name="*Audit" class="org.movie.action.AuditAction" method="{1}">
+            <result name="allAudit" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="delAudit" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="addAudit" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdAudit" type="json">
+                <param name="root">audit</param>
+            </result>
+            <result name="updateAudit" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+    <!--ScreeAction配置-->
+    <package name="scree" extends="json-default" strict-method-invocation="false">
+        <action name="*Scree" class="org.movie.action.ScreeAction" method="{1}">
+            <result name="allScree" type="json">
+                <param name="root">list</param>
+            </result>
+            <result name="delScree" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="addScree" type="json">
+                <param name="root">massage</param>
+            </result>
+            <result name="ByIdScree" type="json">
+                <param name="root">scree</param>
+            </result>
+            <result name="updateScree" type="json">
+                <param name="root">massage</param>
+            </result>
+        </action>
+    </package>
+</struts>

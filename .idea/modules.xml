@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/doEntity/doEntity.iml" filepath="$PROJECT_DIR$/doEntity/doEntity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie-app/movie-app.iml" filepath="$PROJECT_DIR$/movie-app/movie-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie-manager/movie-manager.iml" filepath="$PROJECT_DIR$/movie-manager/movie-manager.iml" />
+    </modules>
+  </component>
+</project>

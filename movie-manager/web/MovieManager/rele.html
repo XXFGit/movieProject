@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            /*-----------------------------查询所有----------------------------------------*/
+            $.get("allMovie",function(result){
+                $.each(result,function(index, obj){
+                    $(".mytable").append("<tr><th class='p'>"+obj.moviePhoto+"</th><th>"+obj.movieName+"</th>"+
+                        "<th>"+obj.type.tname+"</th><th>"+obj.area.aArea+"</th><th>"+obj.year.yNiandai+"</th><th>"+obj.movieDirector+"</th>"+
+                        "<th>"+obj.movieStar+"</th><th>"+obj.movieTimelong+"</th><th>"+obj.movieState+"</th><th>"+
+                        "<input type='button' value='上架' name='"+obj.mid+"'  class='shangjia btn btn-danger'>&nbsp;"+
+                        "<input type='button' value='下架' name='"+obj.mid+"' class='xiajia btn btn-danger'>"+
+                        "</th> </tr>");
+                });
+                $(".shangjia").on("click",function () {
+                    $.get("allAudit",function(result){$("#audit").empty(); $.each(result,function(index,obj){$("#audit").append("<option value="+obj.aid+">"+obj.auditName+"</option>");});})
+                    $.get("allScree",function(result){$("#scree").empty();$.each(result,function(index,obj){ $("#scree").append("<option value="+obj.sid+">"+obj.screeTime+"</option>");});})
+                    $("#ReleeModal").modal("toggle");
+                })
+             });
+        });
+    </script>
+</head>
+<body>
+<table class="search-tab">
+    <tr>
+        <th width="120">选择分类:</th>
+        <td>
+            <select name="search-sort" id="ss">
+                <option value="">全部</option>
+                <option value="19">爱情</option>
+                <option value="20">喜剧</option>
+            </select>
+        </td>
+        <th width="70">关键字:</th>
+        <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+        <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+        <td><input type="button" value="添加"   class=" btn btn-danger add1"/></td>
+    </tr>
+</table>
+
+<form>
+    <table class="table table-bordered mytable table-hover definewidth m10 mytable">
+        <thead>
+        <tr>
+            <th>电影图片</th><th>电影名称</th><th>电影类型</th><th>地区</th><th>年代</th>
+            <th>导演</th><th>主演</th><th>电影时长</th><th>状态</th><th>操作</th>
+        </tr>
+        </thead>
+    </table>
+</form>
+
+<div class="modal fade" id="ReleeModal" style="width:400px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="zz">添加上架信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="myform" method="post" class="definewidth m20" enctype="multipart/form-data">
+                    <div>
+                        <table style="margin-left:10px;margin-top:3px;" id="myinput">
+                            <input type="hidden" name="audit.aid" id="tid">
+                            <tr><td>请选择影厅:</td><td> <select  class="form-control" name="audit.aid"  id="audit"></select></td></tr>
+                            <tr> <td>请选择场次:</td><td> <select  class="form-control" name="scree.sid"  id="scree"></select></td></tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

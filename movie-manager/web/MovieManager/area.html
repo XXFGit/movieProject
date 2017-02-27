@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $.get("allArea",function(result){
+                $("#mytable tr:not(:first)").empty();
+                $.each(result,function(index,obj){
+                    $("#mytable").append("<tr><th>"+obj.aid+"</th> <th>"+obj.aArea+"</th><th><input type='button' value='修改' name='"+obj.aid+"' class='btn btn-danger alter'/><input type='button' name='"+obj.aid+"' value='删除'   class=' btn btn-danger del'/> </th> </tr>");
+                });
+                $(".del").on("click",function(){
+                    var id=$(this).attr("name");
+                    $.post("delArea",{"ID":id},function (result){
+                        alert(result);
+                        location.href="area.html";
+                    });
+                })
+                $(".add1").on("click",function () {
+                    $("#AreaModal").modal("toggle");
+                    $(".save").on("click",function () {
+                        var faram=$("#myform").serialize();
+                        $.post("addArea",faram,function (result) {alert(result);location.href="area.html";})
+                    })
+                })
+                $(".alter").on("click",function () {
+                    $("#zz").html("修改地区信息");
+                    var id=$(this).attr("name");
+                    $("#AreaModal").modal("toggle");
+                    $.post("ByIdArea",{"ID":id},function (result) {
+                        $("#area").val(result.aArea);
+                        $("#aid").val(result.aid);
+                        $(".save").on("click",function () {
+                            var faramm=$("#myform").serialize();
+                            $.post("updateArea",faramm,function (result) {
+                                alert(result);
+                                location.href="area.html";
+                            })
+                        })
+                    })
+                })
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="route_bg">
+    <a href="首页.html" target="menuFrame">主页</a><i class="glyph-icon icon-chevron-right"></i>
+    <a href="area.html">地区管理</a>
+</div>
+<input type="button" value="添加"   class=" btn btn-danger add1"/>
+<form>
+    <table class="table table-bordered mytable table-hover definewidth m10" id="mytable">
+        <thead>
+        <tr style="font-size: 20px;">
+            <th>id</th>
+            <th>地区</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+    </table>
+</form>
+
+<div class="modal fade" id="AreaModal" style="width:400px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="zz">添加地区信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="myform" method="post" class="definewidth m20" enctype="multipart/form-data">
+                    <div>
+                        <table style="margin-left:10px;margin-top:3px;" id="myinput">
+                            <input type="hidden" name="area.aid" id="aid">
+                            <tr> <td>地区名称:</td><td><input type="text" class="modal-form" name="area.aArea" id="area" ></td></tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="JavaScript/movie.js"></script>
+</head>
+<body>
+<div class="route_bg">
+    <a href="首页.html" target="menuFrame">主页</a><i class="glyph-icon icon-chevron-right"></i>
+    <a href="movie.html">电影信息管理</a>
+</div>
+<table class="search-tab" style="margin-top: 20px">
+    <tr>
+        <th width="120">选择分类:</th>
+        <td>
+            <select name="search-sort" id="ss">
+                <option value="">全部</option>
+                <option value="19">豪华厅</option>
+                <option value="20">普通厅</option>
+                <option value="21">3D厅</option>
+            </select>
+        </td>
+        <th width="70">关键字:</th>
+        <td><input class="common-text" placeholder="关键字" name="keywords" value="" id="" type="text"></td>
+        <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+
+    </tr>
+</table>
+<td><input type="button" value="添加"   class=" btn btn-danger add1"/></td>
+<form>
+    <table class="table table-bordered table-hover definewidth m10 mytable">
+        <thead>
+            <tr><th>id</th><th>电影图片</th><th>电影名称</th><th>电影类型</th><th>地区</th><th>年代</th>
+            <th>导演</th><th>主演</th><th>电影时长</th><th>简介</th><th>状态</th><th>电影图集</th><th>操作</th></tr>
+        </thead>
+    </table>
+</form>
+</div>
+
+<!-----------------------添加电影信息的模态框---------------------------------------->
+<div class="modal fade" id="MovieModal" style="width:600px;height:500px;margin-top: -70px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="zz">添加电影信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="myform" method="post" class="definewidth m20" enctype="multipart/form-data">
+                <div style="width:360px;height:360px;float: left;">
+                    <table style="margin-left:10px;margin-top:3px;" id="myinput">
+                        <input type="hidden" name="movie.mid" id="mid">
+                        <tr> <td>电影名称:</td><td><input type="text" class="modal-form" name="movie.movieName" id="movieName" ></td></tr>
+                        <tr><td>类型:</td><td> <select  class="form-control" name="movie.type.tid"  id="type"></select></td></tr>
+                        <tr> <td>地区:</td><td> <select  class="form-control" name="movie.area.aid"  id="area"></select></td></tr>
+                        <tr> <td>年代:</td><td> <select  class="form-control" name="movie.year.yid"  id="year"></select></td></tr>
+                        <tr> <td>导演:</td> <td><input type="text" class="modal-form" name="movie.movieDirector" id="movieDirector"></td></tr>
+                        <tr> <td>主演:</td> <td><input type="text" class="modal-form" name="movie.movieStar" id="movieStar"></td></tr>
+                        <tr> <td>电影时长:</td> <td><input type="text" class="modal-form" name="movie.movieTimelong" id="movieTimelong"></td></tr>
+                        <tr> <td>简介:</td> <td><input type="text" class="modal-form" name="movie.movieText" id="movieText"></td></tr>
+                        <tr> <td>状态:</td> <td><input type="text" class="modal-form" name="movie.movieState" id="movieState"></td></tr>
+                    </table>
+                </div>
+                <div id="imageDiv" style="width:150px;height:200px;border: solid 1px red;margin-top: -350px;margin-left: 360px;float:left">
+                </div>
+                    <input type="file" name="uploadFile" id="upload"  style="width:150px;margin-top: 220px;margin-left: 30px" />
+                    <input type="button" id="uploadBtn" value="确认上传" style="width:75px;margin-top: 10px;margin-left: 30px"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="TujiModal" style="width:400px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="zzz">图集信息</h4>
+            </div>
+            <div class="modal-body">
+                <!--<form id="myform2" method="post" class="definewidth m20" enctype="multipart/form-data">
+                    <div>
+                        <table style="margin-left:10px;margin-top:3px;" >
+                            <input type="hidden" name="type.tid" id="tid">
+                            <tr> <td>类别名称:</td><td><input type="text" class="modal-form" name="type.tname" id="tname" ></td></tr>
+                        </table>
+                    </div>
+                </form>-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
